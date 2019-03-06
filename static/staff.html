@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>员工信息登记表</title>
+		<script src="vue.js"></script>		
+		<script src="axios.js"></script>
+		<script src="elementui.min.js"></script>
+		<link rel="stylesheet" href="elementui.min.css">
+	</head>
+	<body>
+		<div class="wrap">
+			<el-table :data="list" border >
+				<el-table-column prop="ID" label="ID" width="50px">
+					
+				</el-table-column>
+				<el-table-column prop="name" label="名字"> 
+					
+				</el-table-column>
+				<el-table-column prop="sex" label="性别">
+					
+				</el-table-column>
+				<el-table-column prop="birthday" label="生日">
+					
+				</el-table-column>
+				<el-table-column prop="department" label="部门">
+					
+				</el-table-column>
+				<el-table-column prop="status" label="是否在职">
+					<template slot-scope="judge">
+						<el-tooltip :content="judge.row.joinDate" placement="top">
+							<el-tag type="success" v-if="judge.row.status">
+								在职
+							</el-tag>
+						</el-tooltip>
+						<el-tooltip :content="judge.row.leaveDate" placement="top">
+							<el-tag type="dangers" v-if="!judge.row.status">
+								离职
+							</el-tag>
+						</el-tooltip>
+					</template>
+				</el-table-column>
+				<el-table-column prop="IDCard" label="身份证号">
+					
+				</el-table-column>
+				<el-table-column prop="number" label="手机号">
+					
+				</el-table-column>
+				<el-table-column  label="操作">
+					<template slot-scope="bianyi">
+						<el-button type="primary" icon="el-icon-edit" @click="edit()">
+							编辑
+						</el-button>
+						<el-button type="danger" icon="el-icon-delete" @click="delete1(bianyi.row.ID)">
+							删除
+						</el-button>
+						<el-dialog :visible.sync="judge" width="500px" title="">
+							<p></p>
+						    <el-button type="primary" >取 消</el-button>
+						    <el-button type="danger">确 定</el-button>
+						</el-dialog>
+					</template>
+				</el-table-column>
+			</el-table>	
+		</div>
+	<script src="js/staff.js"></script>
+	</body>
+	</html>	
